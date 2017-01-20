@@ -1,0 +1,23 @@
+{
+    "name": "achertovsky/yii2-debug-cli",
+    "description": "Opens CLI scripts for /debug access",
+    "type": "yii2-extension",
+    "keywords": ["yii2"," extension"],
+    "version": "@dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Zaets",
+            "email": "alexzaets.dev@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": ">=2.0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "achertovsky\\yii2-debug-cli\\": ""
+        }
+    }
+}
