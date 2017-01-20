@@ -1,6 +1,6 @@
 <?php
 
-namespace achertovsky\yii2-debug-cli;
+namespace achertovsky\debug;
 
 use Yii;
 use yii\debug\LogTarget as CoreLogTarget;
