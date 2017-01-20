@@ -33,8 +33,8 @@ to start using it - please, add it to your modules section
 
 fox example: 
 ```
- 	'debug' => [
-            'class' => 'achertovsky\yii2-debug-cli\Module',
-            'logTarget' => 'achertovsky\yii2-debug-cli\LogTarget',
-        ],
+'debug' => [
+    'class' => 'achertovsky\yii2-debug-cli\Module',
+    'logTarget' => 'achertovsky\yii2-debug-cli\LogTarget',
+],
 ```
