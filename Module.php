@@ -24,9 +24,6 @@ class Module extends CoreModule
      */
     protected function checkAccess()
     {
-        if (Yii::$app->user->isGuest) {
-            return false;
-        }
         $ip = Yii::$app->getRequest()->getUserIP();
         foreach ($this->allowedIPs as $filter) {
             if ($filter === '*' ||
