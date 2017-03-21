@@ -8,6 +8,7 @@ use yii\debug\panels\RequestPanel;
 use yii\helpers\FileHelper;
 use yii\debug\panels\AssetPanel;
 use yii\base\InvalidConfigException;
+use yii\debug\panels\UserPanel;
 
 class LogTarget extends CoreLogTarget
 {
@@ -55,7 +56,11 @@ class LogTarget extends CoreLogTarget
         $dataFile = "$path/{$this->tag}.data";
         $data = [];
         foreach ($this->module->panels as $id => $panel) {
-            if ($panel::className() != RequestPanel::className() && $panel::className() != AssetPanel::className()) {
+            if (
+                $panel::className() != RequestPanel::className() &&
+                $panel::className() != AssetPanel::className() &&
+                $panel::className() != UserPanel::className()
+            ) {
                 $data[$id] = $panel->save();
             }
         }
