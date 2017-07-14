@@ -68,4 +68,14 @@ class Module extends CoreModule
 
         return $panels;
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        $this->dataPath = Yii::getAlias($this->dataPath);
+        $this->initPanels();
+    }
 }
