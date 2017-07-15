@@ -74,7 +74,16 @@ class Module extends CoreModule
      */
     public function init()
     {
-        parent::init();
+        /*
+         * avoid execution of debug Module init
+         * thats why copy-paste code from core module
+         */
+        if ($this->controllerNamespace === null) {
+            $class = get_class($this);
+            if (($pos = strrpos($class, '\\')) !== false) {
+                $this->controllerNamespace = substr($class, 0, $pos) . '\\controllers';
+            }
+        }
         $this->dataPath = Yii::getAlias($this->dataPath);
         $this->initPanels();
     }
