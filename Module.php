@@ -4,9 +4,18 @@ namespace achertovsky\debug;
 
 use Yii;
 use yii\debug\Module as CoreModule;
+use yii\helpers\ArrayHelper;
 
 class Module extends CoreModule
 {
+    /**
+     * Controller mapping
+     * @var array
+     */
+    public $controllerMap = [
+        'default' => 'achertovsky\debug\controllers\DefaultController',
+    ];
+    
     public $defaultPanel = 'profiling';
     public $historySize = 10000;
     public $dataPath = '@root/frontend/runtime/debug';
@@ -53,7 +62,6 @@ class Module extends CoreModule
             'log' => ['class' => 'yii\debug\panels\LogPanel'],
             'profiling' => ['class' => 'yii\debug\panels\ProfilingPanel'],
             'db' => ['class' => 'yii\debug\panels\DbPanel'],
-            'assets' => ['class' => 'yii\debug\panels\AssetPanel'],
             'mail' => ['class' => 'yii\debug\panels\MailPanel'],
             'timeline' => ['class' => 'yii\debug\panels\TimelinePanel'],
         ];
