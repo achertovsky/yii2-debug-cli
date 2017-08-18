@@ -72,6 +72,7 @@ class Module extends CoreModule
                 $panels['user'] = ['class' => 'yii\debug\panels\UserPanel'];
             }
             $panels['router'] = ['class' => 'yii\debug\panels\RouterPanel'];
+            $panels['assets'] = ['class' => 'yii\debug\panels\AssetPanel'];
         }
 
         return $panels;
