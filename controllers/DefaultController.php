@@ -61,6 +61,9 @@ class DefaultController extends \yii\debug\controllers\DefaultController
         $panel = $panels[$panelId];
         foreach ($manifest as $action) {
             $dataFile = $this->module->dataPath . "/{$action['tag']}.data";
+            if (!file_exists($dataFile)) {
+                continue;
+            }
             $data = unserialize(file_get_contents($dataFile));
             if (is_array($data[$panelId])) {
                 $panel->load($data[$panelId]);
