@@ -16,6 +16,7 @@ class Module extends CoreModule
         'default' => 'achertovsky\debug\controllers\DefaultController',
     ];
     
+    public $profilingPanelId = 'profiling';
     public $defaultPanel = 'profiling';
     public $historySize = 10000;
     public $dataPath = '@root/frontend/runtime/debug';

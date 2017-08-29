@@ -48,4 +48,41 @@ class DefaultController extends \yii\debug\controllers\DefaultController
 
         throw new NotFoundHttpException("Unable to find debug data tagged with '$tag'.");
     }
+    
+    public function actionActionsSummary()
+    {
+        $result = [];
+        $manifest = $this->getManifest();
+        $panels = $this->module->panels;
+        $panelId = $this->module->profilingPanelId;
+        if (!isset($panels[$panelId])) {
+            throw new \yii\web\NotFoundHttpException('No profiling panel found.');
+        }
+        $panel = $panels[$panelId];
+        foreach ($manifest as $action) {
+            $dataFile = $this->module->dataPath . "/{$action['tag']}.data";
+            $data = unserialize(file_get_contents($dataFile));
+            if (is_array($data[$panelId])) {
+                $panel->load($data[$panelId]);
+            } else {
+                $panel->load(unserialize($data[$panelId]));
+            }
+            if (!isset($result[$action['url']])) {
+                $result[$action['url']]['totalCount'] = 0;
+                $result[$action['url']]['totalTime'] = 0;
+                $result[$action['url']]['totalMemory'] = 0;
+            }
+            $result[$action['url']] = [
+                'totalTime' => $result[$action['url']]['totalTime']+$panel->data['time'],
+                'totalMemory' => $result[$action['url']]['totalMemory']+$panel->data['time'],
+                'totalCount' => ++$result[$action['url']]['totalCount'],
+            ];
+        }
+        return $this->render(
+            'actions-average',
+            [
+                'results' => $result,
+            ]
+        );
+    }
 }
