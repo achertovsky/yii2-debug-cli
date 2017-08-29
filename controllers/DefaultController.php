@@ -82,7 +82,7 @@ class DefaultController extends \yii\debug\controllers\DefaultController
             ];
         }
         return $this->render(
-            'actions-average',
+            'actions-summary',
             [
                 'results' => $result,
             ]
