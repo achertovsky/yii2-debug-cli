@@ -76,8 +76,8 @@ class DefaultController extends \yii\debug\controllers\DefaultController
                 $result[$action['url']]['totalMemory'] = 0;
             }
             $result[$action['url']] = [
-                'totalTime' => $result[$action['url']]['totalTime']+$panel->data['time'],
-                'totalMemory' => $result[$action['url']]['totalMemory']+$panel->data['time'],
+                'totalTime' => $result[$action['url']]['totalTime']+$panel->data['time']*1000,
+                'totalMemory' => $result[$action['url']]['totalMemory']+$panel->data['memory']/1024,
                 'totalCount' => ++$result[$action['url']]['totalCount'],
             ];
         }
