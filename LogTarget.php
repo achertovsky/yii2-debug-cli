@@ -113,4 +113,28 @@ class LogTarget extends CoreLogTarget
             @chmod($indexFile, $this->module->fileMode);
         }
     }
+    
+    /**
+     * Added support of except
+     * @inheritdoc
+     */
+    public function collect($messages, $final)
+    {
+        if (!empty($this->except)) {
+            foreach ($messages as $key => $message) {
+                foreach ($this->except as $except) {
+                    $prefix = rtrim($except, '*');
+                    if (($message[2] == $except) || (strpos($message[2], $prefix) !== false)) {
+                        unset($messages[$key]);
+                    }
+                }
+            }
+        }
+        if (!empty($messages)) {
+            $this->messages = array_merge($this->messages, $messages);
+        }
+        if ($final) {
+            $this->export();
+        }
+    }
 }
