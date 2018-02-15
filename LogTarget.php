@@ -123,8 +123,10 @@ class LogTarget extends CoreLogTarget
         if (!empty($this->except)) {
             foreach ($messages as $key => $message) {
                 foreach ($this->except as $except) {
-                    $prefix = rtrim($except, '*');
-                    if (empty($message[2]) || ($message[2] == $except) || (strpos($message[2], $prefix) !== false)) {
+                    if ($except !== '*') {
+                        $prefix = rtrim($except, '*');
+                    }
+                    if (($message[2] == $except) || (strpos($message[2], $prefix) !== false)) {
                         unset($messages[$key]);
                     }
                 }
