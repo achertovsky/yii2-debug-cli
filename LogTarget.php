@@ -28,7 +28,7 @@ class LogTarget extends CoreLogTarget
         }
         $summary = [
             'tag' => $this->tag,
-            'url' => php_sapi_name() != 'cli' ? $request->getAbsoluteUrl() : $params[0],
+            'url' => php_sapi_name() != 'cli' ? $request->getAbsoluteUrl() : implode(' ', $params),
             'ajax' => php_sapi_name() != 'cli' ? (int) $request->getIsAjax() : 0,
             'method' => php_sapi_name() != 'cli' ? $request->getMethod() : "CLI",
             'ip' => php_sapi_name() != 'cli' ? $request->getUserIP() : '127.0.0.1',
