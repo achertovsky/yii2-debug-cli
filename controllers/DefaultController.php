@@ -2,6 +2,8 @@
 
 namespace achertovsky\debug\controllers;
 
+use yii\web\NotFoundHttpException;
+
 /**
  * Fixing issues
  * Extending functionality
