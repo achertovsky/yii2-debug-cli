@@ -8,8 +8,10 @@
 use yii\data\ArrayDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Yii Debugger';
+achertovsky\debug\IndexAsset::register($this);
 
 ?>
 <div class="default-index">
@@ -57,6 +59,20 @@ if (isset($this->context->module->panels['db']) && isset($this->context->module-
         },
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            [
+                'label' => 'Time (ms)',
+                'value' => function ($data) {
+                    return Html::a(
+                        'n/a',
+                        '#',
+                        [
+                            'class' => 'get-time-spent',
+                            'data-tag' => $data['tag'],
+                        ]
+                    );
+                },
+                'format' => 'raw',
+            ],
             [
                 'attribute' => 'tag',
                 'value' => function ($data) {
@@ -146,4 +162,5 @@ if (isset($this->context->module->panels['db']) && isset($this->context->module-
     if (!window.frameElement) {
         document.querySelector('#yii-debug-toolbar').style.display = 'block';
     }
+    var tagInfoUrl = '<?=Url::toRoute('default/tag-info')?>';
 </script>

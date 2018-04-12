@@ -3,6 +3,8 @@
 namespace achertovsky\debug\controllers;
 
 use yii\web\NotFoundHttpException;
+use Yii;
+use yii\web\Response;
 
 /**
  * Fixing issues
@@ -89,5 +91,20 @@ class DefaultController extends \yii\debug\controllers\DefaultController
                 'results' => $result,
             ]
         );
+    }
+    
+    /**
+     * @param string $tag
+     * @return json
+     */
+    public function actionTagInfo($tag)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!isset($this->module->panels['profiling'])) {
+            return [];
+        }
+        $dataFile = $this->module->dataPath . "/$tag.data";
+        $data = unserialize(file_get_contents($dataFile));
+        return $data['profiling'];
     }
 }

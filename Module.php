@@ -26,6 +26,7 @@ class Module extends CoreModule
         $logTarget = new $this->logTarget($this);
         parent::bootstrap($app);
         $this->logTarget = Yii::$app->getLog()->targets['debug'] = $logTarget;
+        Yii::setAlias('@ach-debug', '@vendor/achertovsky/yii2-debug-cli');
     }
     
     /**
