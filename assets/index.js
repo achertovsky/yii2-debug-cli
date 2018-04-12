@@ -11,3 +11,19 @@ $('.get-time-spent').on('click', function (e) {
         }
     );
 });
+
+function getAvgTime()
+{
+    var stats = $('.get-time-spent');
+    var total = 0;
+    var sum = 0;
+    $.each(stats, function (key, value) {
+        var val = $(value).text();
+        if (val == 'n/a') {
+            return true;
+        }
+            total++;
+            sum += +val;
+    });
+    console.log(sum/total);
+}
