@@ -1,4 +1,5 @@
 $('.get-time-spent').on('click', function (e) {
+    e.preventDefault();
     var tag = $(this).data('tag');
     $.ajax(
         {
