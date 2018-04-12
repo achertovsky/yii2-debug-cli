@@ -35,7 +35,12 @@ achertovsky\debug\IndexAsset::register($this);
 if (isset($this->context->module->panels['db']) && isset($this->context->module->panels['request'])) {
 
     echo "			<h1>Available Debug Data</h1>";
-
+    echo Html::button(
+        'Get average timing',
+        [
+            'id' => 'getAverageTime'
+        ]
+    );
     $codes = [];
     foreach ($manifest as $tag => $vals) {
         if (!empty($vals['statusCode'])) {

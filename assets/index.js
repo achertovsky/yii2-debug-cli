@@ -25,5 +25,11 @@ function getAvgTime()
             total++;
             sum += +val;
     });
-    console.log(sum/total);
+    alert("Calculated from "+total+" values and average is: "+(sum/total));
 }
+
+$('#getAverageTime').on('click', function(e)
+{
+    e.preventDefault();
+    getAvgTime();
+});
