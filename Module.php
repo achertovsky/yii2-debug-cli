@@ -15,6 +15,13 @@ class Module extends CoreModule
     public $controllerMap = [
         'default' => 'achertovsky\debug\controllers\DefaultController',
     ];
+
+    /**
+     * @param array $dbProfileLogs
+     * Allows to expand default classes that should be counted as db queries
+     * In case of components override
+     */
+    public $dbProfileLogs = [];
     
     public $profilingPanelId = 'profiling';
     public $defaultPanel = 'profiling';
@@ -63,7 +70,7 @@ class Module extends CoreModule
             'request' => ['class' => 'yii\debug\panels\RequestPanel'],
             'log' => ['class' => 'yii\debug\panels\LogPanel'],
             'profiling' => ['class' => 'yii\debug\panels\ProfilingPanel'],
-            'db' => ['class' => 'yii\debug\panels\DbPanel'],
+            'db' => ['class' => 'achertovsky\debug\panels\DbPanel'],
             'mail' => ['class' => 'yii\debug\panels\MailPanel'],
             'timeline' => ['class' => 'yii\debug\panels\TimelinePanel'],
         ];

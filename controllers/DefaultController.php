@@ -9,7 +9,7 @@ use yii\web\Response;
 /**
  * Fixing issues
  * Extending functionality
- * 
+ *
  * @inheritdoc
  *
  * @author Alexander Chertovsky
