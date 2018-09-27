@@ -38,7 +38,7 @@ class LogTarget extends CoreLogTarget
         ];
 
         if (isset($this->module->panels['mail'])) {
-            $summary['mailCount'] = count($this->module->panels['mail']->getMessages());
+            $summary['mailCount'] = count($this->module->panels['mail']->getMessagesFileName());
         }
 
         return $summary;
