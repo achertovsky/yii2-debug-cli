@@ -55,12 +55,13 @@ class LogTarget extends CoreLogTarget
         $summary = $this->collectSummary();
         $dataFile = "$path/{$this->tag}.data";
         $data = [];
+        $frontend = php_sapi_name() != 'cli';
         foreach ($this->module->panels as $id => $panel) {
-            if (
+            if ($frontend || (
                 $panel::className() != RequestPanel::className() &&
                 $panel::className() != AssetPanel::className() &&
                 $panel::className() != UserPanel::className()
-            ) {
+            )) {
                 $data[$id] = $panel->save();
             }
         }
