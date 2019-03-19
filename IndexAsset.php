@@ -19,6 +19,9 @@ class IndexAsset extends \yii\web\AssetBundle
     public $js = [
         'index.js',
     ];
+    public $css = [
+        'override.css',
+    ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
