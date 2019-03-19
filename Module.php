@@ -40,7 +40,7 @@ class Module extends CoreModule
      * Checks if current user is allowed to access the module
      * @return boolean if access is granted
      */
-    protected function checkAccess()
+    protected function checkAccess($action = null)
     {
         $ip = Yii::$app->getRequest()->getUserIP();
         foreach ($this->allowedIPs as $filter) {
