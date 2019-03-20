@@ -4,6 +4,7 @@
 use yii\helpers\Html;
 
 yii\debug\DebugAsset::register($this);
+achertovsky\debug\OverrideAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

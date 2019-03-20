@@ -1,0 +1,19 @@
+.container.main-container{
+    max-width: 98%; 
+    font-size: 2em; 
+}
+.main-container .grid-view{
+    width:100%;
+}
+table .list-group.dropdown-list-group{
+    position: relative;
+}
+table .list-group.dropdown-list-group .dropdown-list-inner{
+    position:absolute;
+    width: 200px;
+    display:none;
+    left: -20px;
+}
+table tr td:nth-child(3):hover .list-group.dropdown-list-group .dropdown-list-inner{
+    display: block;
+}

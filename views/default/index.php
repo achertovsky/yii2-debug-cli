@@ -11,7 +11,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = 'Yii Debugger';
-achertovsky\debug\IndexAsset::register($this);
+achertovsky\debug\OverrideAsset::register($this);
 
 ?>
 <div class="default-index">
@@ -28,7 +28,7 @@ achertovsky\debug\IndexAsset::register($this);
         </div>
     </div>
 
-    <div class="container">
+    <div class="container main-container">
         <div class="row">
 <?php
 
@@ -80,8 +80,18 @@ if (isset($this->context->module->panels['db']) && isset($this->context->module-
             ],
             [
                 'attribute' => 'tag',
-                'value' => function ($data) {
-                    return Html::a($data['tag'], ['view', 'tag' => $data['tag']]);
+                'value' => function ($data) use ($panels) {
+                    $panelsHtml = [];
+                    foreach ($panels as $id => $panel) {
+                        $label = '<i class="glyphicon glyphicon-chevron-right"></i>' . Html::encode($panel->getName());
+                        $panelsHtml[] = Html::a($label, ['view','panel' => $id], [
+                            'class' => 'list-group-item',
+                        ]);
+                    }
+                    return '<span class="dropdown-list">' . Html::a($data['tag'], ['view', 'tag' => $data['tag']]) . '</span>'.
+                    '<div class="list-group dropdown-list-group">' .
+                        '<span class="dropdown-list-inner">'. implode('', $panelsHtml) . '</span>'.
+                    '</div>';
                 },
                 'format' => 'html',
             ],
