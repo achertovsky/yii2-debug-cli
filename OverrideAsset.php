@@ -18,6 +18,7 @@ class OverrideAsset extends \yii\web\AssetBundle
     public $sourcePath = '@ach-debug/assets';
     public $js = [
         'index.js',
+        'override.js'
     ];
     public $css = [
         'override.css',
