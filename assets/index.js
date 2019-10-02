@@ -33,3 +33,8 @@ $('#getAverageTime').on('click', function(e)
     e.preventDefault();
     getAvgTime();
 });
+
+$('td .dropdown-list i').on('click', function(){
+    $(this).parent().next().toggleClass('active');
+    $(this).toggleClass('glyphicon-triangle-top');
+});

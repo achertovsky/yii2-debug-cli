@@ -84,7 +84,7 @@ if (isset($this->context->module->panels['db']) && isset($this->context->module-
                     $panelsHtml = [];
                     foreach ($panels as $id => $panel) {
                         $label = '<i class="glyphicon glyphicon-chevron-right"></i>' . Html::encode($panel->getName());
-                        $panelsHtml[] = Html::a($label, ['view','panel' => $id], [
+                        $panelsHtml[] = Html::a($label, ['view', 'tag' => $data['tag'], 'panel' => $id], [
                             'class' => 'list-group-item',
                         ]);
                     }
