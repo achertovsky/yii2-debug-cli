@@ -88,7 +88,7 @@ if (isset($this->context->module->panels['db']) && isset($this->context->module-
                             'class' => 'list-group-item',
                         ]);
                     }
-                    return '<span class="dropdown-list">' . Html::a($data['tag'], ['view', 'tag' => $data['tag']]) . '</span>'.
+                    return '<span class="dropdown-list">' . Html::a($data['tag'], ['view', 'tag' => $data['tag']]) . '<i class="glyphicon glyphicon-triangle-bottom"></i></span>'.
                     '<div class="list-group dropdown-list-group">' .
                         '<span class="dropdown-list-inner">'. implode('', $panelsHtml) . '</span>'.
                     '</div>';
