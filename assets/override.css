@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500,600');
 @import url('https://fonts.googleapis.com/css?family=Roboto: 400,700,900');
-​
 .container.main-container{
     max-width: 98vw; 
     font-size: 2em;
@@ -38,24 +37,20 @@ table .list-group.dropdown-list-group .dropdown-list-inner a i{
 /* table tr td:nth-child(3):hover .list-group.dropdown-list-group .dropdown-list-inner{
     display: block;
 } */
-​
 .dropdown-list i{
     font-size: 14px;
     cursor: pointer;
     margin-left: 8px;
     color: #0b72b8;
 }
-​
 .list-group-item i{
     margin-right: 9px;
     font-size: 1.4rem;
 }
-​
 .list-group.dropdown-list-group.active .dropdown-list-inner{
     display: block;
     z-index: 10;
 }
-​
 #getAverageTime{
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -99,7 +94,6 @@ table .list-group.dropdown-list-group .dropdown-list-inner a i{
 .table.table-striped.table-bordered tbody tr td{
     border: 2px solid #e6e6e6;
 }
-​
 .table thead tr td .form-control{
     height: 30px;
     font-size: 1.5rem;
@@ -113,31 +107,25 @@ ul.pagination{
     margin:0;
     background: rgba(0,0,0,0.6);
 }
-​
 ul.pagination > li > a, ul.pagination > li > span{
     color: #333;
 }
-​
 ul.pagination > .active > a, ul.pagination > .active > span, ul.pagination > .active > a:hover, ul.pagination > .active > span:hover, ul.pagination > .active > a:focus, ul.pagination > .active > span:focus{
     background-color: #737373;
     border-color: #737373;
 }
-​
 #yii-debug-toolbar .yii-debug-toolbar__bar{
     justify-content: space-between;
 }
-​
 #yii-debug-toolbar .yii-debug-toolbar__bar .yii-debug-toolbar__block a{
     font-size: 1.4rem;
     font-family: 'Montserrat', sans-serif;
 }
-​
 #yii-debug-toolbar .yii-debug-toolbar__bar .yii-debug-toolbar__label{
     margin-left: 6px;
     margin-right: 6px;
     padding: 4px 8px;
 }
-​
 .btn-group .btn.btn-default{
     font-size: 14px;
     background-color: #737373;
@@ -146,11 +134,9 @@ ul.pagination > .active > a, ul.pagination > .active > span, ul.pagination > .ac
     border-radius: 4px;
     color: #fff;
 }
-​
 .btn-group .btn.btn-default .caret{
     display: none;
 }
-​
 .btn-group.show.open ul li a{
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
