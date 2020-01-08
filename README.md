@@ -38,3 +38,6 @@ fox example:
     'logTarget' => 'achertovsky\debug\LogTarget',
 ],
 ```
+in advanced template *personally me* use it under common/config/main.php
+
+in basic template i would (never did) put it both to config/web.php and config/console.php (waiting for feedbacks)
