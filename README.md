@@ -31,7 +31,7 @@ Usage
 
 to start using it - please, add it to your modules section
 
-fox example: 
+for example: 
 ```
 'debug' => [
     'class' => 'achertovsky\debug\Module',
@@ -41,3 +41,21 @@ fox example:
 in advanced template *personally me* use it under common/config/main.php
 
 in basic template i would (never did) put it both to config/web.php and config/console.php (waiting for feedbacks)
+
+Usage of errors hub
+======
+1. migrate
+ `./yii migrate/up -p vendor/achertovsky/yii2-debug-cli/migrations`
+2. to cover all entrypoints suggestion is to define dispatcher in main config
+- in advanced template *personally me* use it under common/config/main.php
+- in basic template i would (never did) put it both to config/web.php and config/console.php (waiting for feedbacks)
+```
+'components' => [
+    'log' => [
+        'class' => '\achertovsky\debug\log\Dispatcher',
+        //...
+    ],
+    //...
+]
+```
+3. Use it. /debug/error-hub

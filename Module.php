@@ -9,12 +9,15 @@ use yii\helpers\ArrayHelper;
 class Module extends CoreModule
 {
     /**
+     * Preffered error hub database component name
+     */
+    public $errorHubDb = 'db';
+
+    /**
      * Controller mapping
      * @var array
      */
-    public $controllerMap = [
-        'default' => 'achertovsky\debug\controllers\DefaultController',
-    ];
+    public $controllerNamespace = 'achertovsky\debug\controllers';
 
     /**
      * @param array $dbProfileLogs
@@ -28,6 +31,9 @@ class Module extends CoreModule
     public $historySize = 10000;
     public $dataPath = '@root/frontend/runtime/debug';
     
+    /**
+     * {@inheritdoc}
+     */
     public function bootstrap($app)
     {
         $logTarget = new $this->logTarget($this);
