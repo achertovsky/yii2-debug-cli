@@ -20,18 +20,18 @@ achertovsky\debug\OverrideAsset::register($this);
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view}'
+                    ],
                     'count',
-                    'text:ntext',
-                    'category',
                     [
                         'value' => 'updated_at',
                         'label' => 'Last case',
                         'format' => 'datetime'
                     ],
-                    [
-                        'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view}'
-                    ],
+                    'text:ntext',
+                    
                 ],
             ]); ?>
         </div>
