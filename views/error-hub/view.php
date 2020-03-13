@@ -84,7 +84,8 @@ function niceDisplay($data, $level = 0)
                     } catch (\Exception $ex) {
                         return $model->text;
                     }
-                }
+                },
+                'format' => 'raw'
             ],
             [
                 'value' => $model->created_at,
