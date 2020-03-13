@@ -12,23 +12,39 @@ $this->params['breadcrumbs'][] = ['label' => 'Error Hubs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
-function niceDisplay($data)
+function tab($level)
+{
+    return "<span>".str_pad('', $level*4)."</span>";
+}
+
+function niceDisplay($data, $level = 0)
 {
     if (is_string($data)) {
         return $data;
     }
     $result = '';
+    end($data);
+    $lastKey = key($data);
     foreach ($data as $key => $traceLine) {
-        if (is_string($traceLine)) {
-            $result .= "$traceLine\n";
+        if (is_string($traceLine) || is_int($traceLine) || is_bool($traceLine)) {
+            if ($traceLine == '') {
+                $result .= '';
+                continue;
+            }
+            $result .= tab($level == 1 ? 0 : $level).(is_int($key) ? '' : "$key: ").
+                trim($traceLine).($key == $lastKey ? "" : "\n");
             continue;
         }
-        $result .= "<b>$key:</b>\n";
+        $result .= tab($level++)."<b>$key:</b>\n";
         foreach ($traceLine as $key => $value) {
-            if (is_array($value)) {
-                $value = 'array('.implode(', ', $value).')';
+            $long = false;
+            if (is_array($value) && !empty($value)) {
+                $value = niceDisplay($value, $level+1);
+                $long = true;
+            } elseif (empty($value)) {
+                $value = '';
             }
-            $result .= "<span>    </span>$key: $value\n";
+            $result .= trim(tab($level)."$key:".($long ? "\n" : " ")."$value")."\n";
         }
     }
     return $result;
