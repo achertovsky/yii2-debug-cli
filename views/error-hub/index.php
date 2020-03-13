@@ -30,7 +30,20 @@ achertovsky\debug\OverrideAsset::register($this);
                         'label' => 'Last case',
                         'format' => 'datetime'
                     ],
-                    'text:ntext',
+                    [
+                        'attribute' => 'text',
+                        'value' => function ($model) {
+                            try {
+                                $result = unserialize($model->text);
+                                if (is_string($result)) {
+                                    return $result;
+                                }
+                                return $model->text;
+                            } catch (\Exception $ex) {
+                                return $model->text;
+                            }
+                        }
+                    ],
                     
                 ],
             ]); ?>

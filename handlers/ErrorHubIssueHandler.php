@@ -8,6 +8,7 @@ use yii\base\BaseObject;
 use achertovsky\debug\Module;
 use yii\base\InvalidConfigException;
 use achertovsky\debug\models\ErrorHub;
+use Exception;
 
 /**
  * Contains rules to communicate with the ErrorHubModel
@@ -38,8 +39,15 @@ class ErrorHubIssueHandler extends BaseObject
             return;
         }
         try {
-            $message[0] = Json::encode($message[0]);
-            $message[4] = Json::encode($message[4]);
+            if (empty($message[4]) && $message[0] instanceof Exception) {
+                $message[4] = $message[0]->getTrace();
+            }
+            if ($message[0] instanceof Exception) {
+                $message[0] = $message[0]->getMessage();
+            } else {
+                $message[0] = serialize($message[0]);
+            }
+            $message[4] = serialize($message[4]);
             $issueId = md5($message[0].$message[4].$message[2]);
             $error = ErrorHub::findOne(['issue_id' => $issueId]);
             if (is_null($error)) {

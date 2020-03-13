@@ -11,6 +11,28 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Error Hubs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
+function niceDisplay($data)
+{
+    if (is_string($data)) {
+        return $data;
+    }
+    $result = '';
+    foreach ($data as $key => $traceLine) {
+        if (is_string($traceLine)) {
+            $result .= "$traceLine\n";
+            continue;
+        }
+        $result .= "<b>$key:</b>\n";
+        foreach ($traceLine as $key => $value) {
+            if (is_array($value)) {
+                $value = 'array('.implode(', ', $value).')';
+            }
+            $result .= "<span>    </span>$key: $value\n";
+        }
+    }
+    return $result;
+}
 ?>
 <div class="error-hub-view">
 
@@ -37,7 +59,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'count',
-            'text:ntext',
+            [
+                'attribute' => 'text',
+                'value' => function ($model) {
+                    try {
+                        $data = unserialize($model->text);
+                        return niceDisplay($data);
+                    } catch (\Exception $ex) {
+                        return $model->text;
+                    }
+                }
+            ],
             [
                 'value' => $model->created_at,
                 'label' => 'First case',
@@ -51,17 +83,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'category',
             [
                 'attribute' => 'trace',
-                'value' => function () use ($model) {
+                'value' => function ($model) {
                     try {
-                        $json = Json::decode($model->trace);
-                        $result = '';
-                        foreach ($json as $key => $traceLine) {
-                            $result .= "<b>$key:</b>\n";
-                            foreach ($traceLine as $key => $value) {
-                                $result .= "<span>    </span>$key: $value\n";
-                            }
+                        $data = unserialize($model->trace);
+                        if (empty($data)) {
+                            return '';
                         }
-                        return $result;
+                        return niceDisplay($data);
                     } catch (\Exception $ex) {
                         return "Error: Wrong format of trace\n";
                     }
