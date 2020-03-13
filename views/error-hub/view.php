@@ -35,16 +35,16 @@ function niceDisplay($data, $level = 0)
                 trim($traceLine).($key == $lastKey ? "" : "\n");
             continue;
         }
-        $result .= tab($level++)."<b>$key:</b>\n";
+        $result .= tab($level)."<b>$key:</b>\n";
         foreach ($traceLine as $key => $value) {
             $long = false;
             if (is_array($value) && !empty($value)) {
-                $value = niceDisplay($value, $level+1);
+                $value = niceDisplay($value, $level+2);
                 $long = true;
             } elseif (empty($value)) {
                 $value = '';
             }
-            $result .= trim(tab($level)."$key:".($long ? "\n" : " ")."$value")."\n";
+            $result .= trim(tab($level+1)."$key:".($long ? "\n" : " ")."$value")."\n";
         }
     }
     return $result;
