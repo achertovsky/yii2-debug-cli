@@ -9,6 +9,7 @@ use achertovsky\debug\Module;
 use yii\base\InvalidConfigException;
 use achertovsky\debug\models\ErrorHub;
 use Exception;
+use yii\web\NotFoundHttpException;
 
 /**
  * Contains rules to communicate with the ErrorHubModel
@@ -43,7 +44,7 @@ class ErrorHubIssueHandler extends BaseObject
                 $message[4] = $message[0]->getTrace();
             }
             if ($message[0] instanceof Exception) {
-                $message[0] = $message[0]->getMessage();
+                $message[0] = self::getExceptionText($message[0]);
             } else {
                 $message[0] = serialize($message[0]);
             }
@@ -70,6 +71,28 @@ class ErrorHubIssueHandler extends BaseObject
         } catch (\Exception $ex) {
             Yii::$app->params['error_hub_issue'] = 1;
             Yii::error($ex);
+        }
+    }
+
+    /**
+     * Treats different exceptions in better way
+     *
+     * @param Exception $message
+     * @return void
+     */
+    public static function getExceptionText(Exception $ex)
+    {
+        $class = get_class($ex);
+        switch ($class) {
+            case 'yii\web\NotFoundHttpException':
+                try {
+                    return $ex->getPrevious()->getMessage();
+                } catch (\Exception $ex) {
+                    return "Page not found. Impossible to define which";
+                }
+                break;
+            default:
+                return $ex->getMessage();
         }
     }
 }
