@@ -42,13 +42,11 @@ class ErrorHub extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'default', 'value' => uniqid()],
+            [['id'], 'default', 'value' => uniqid(getmypid(), true)],
             [['id'], 'required'],
             [['text', 'trace'], 'string'],
             [['created_at', 'updated_at', 'count'], 'integer'],
             [['id', 'category', 'issue_id'], 'string', 'max' => 255],
-            [['issue_id'], 'unique'],
-            [['id'], 'unique'],
         ];
     }
 
