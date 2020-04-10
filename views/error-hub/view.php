@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\widgets\DetailView;
+use achertovsky\formatter\i18n\Formatter;
 
 /* @var $this yii\web\View */
 /* @var $model achertovsky\debug\models\ErrorHub */
@@ -12,43 +13,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Error Hubs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
-function tab($level)
-{
-    return "<span>".str_pad('', $level*4)."</span>";
-}
-
-function niceDisplay($data, $level = 0)
-{
-    if (is_string($data)) {
-        return $data;
-    }
-    $result = '';
-    end($data);
-    $lastKey = key($data);
-    foreach ($data as $key => $traceLine) {
-        if (is_string($traceLine) || is_int($traceLine) || is_bool($traceLine)) {
-            if ($traceLine == '') {
-                $result .= '';
-                continue;
-            }
-            $result .= tab($level == 1 ? 0 : $level).(is_int($key) ? '' : "$key: ").
-                trim($traceLine).($key == $lastKey ? "" : "\n");
-            continue;
-        }
-        $result .= tab($level)."<b>$key:</b>\n";
-        foreach ($traceLine as $key => $value) {
-            $long = false;
-            if (is_array($value) && !empty($value)) {
-                $value = niceDisplay($value, $level+2);
-                $long = true;
-            } elseif (empty($value)) {
-                $value = '';
-            }
-            $result .= trim(tab($level+1)."$key:".($long ? "\n" : " ")."$value")."\n";
-        }
-    }
-    return $result;
-}
 ?>
 <div class="error-hub-view">
 
@@ -80,7 +44,8 @@ function niceDisplay($data, $level = 0)
                 'value' => function ($model) {
                     try {
                         $data = unserialize($model->text);
-                        return niceDisplay($data);
+                        $formatter = new Formatter();
+                        return $formatter->asJson($data);
                     } catch (\Exception $ex) {
                         return $model->text;
                     }
@@ -106,7 +71,8 @@ function niceDisplay($data, $level = 0)
                         if (empty($data)) {
                             return '';
                         }
-                        return niceDisplay($data);
+                        $formatter = new Formatter();
+                        return $formatter->asJson($data);
                     } catch (\Exception $ex) {
                         return "Error: Wrong format of trace\n";
                     }

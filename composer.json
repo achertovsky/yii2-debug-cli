@@ -13,7 +13,8 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2-debug": "2.1.4"
+        "yiisoft/yii2-debug": "2.1.4",
+        "achertovsky/yii2-json-formatter": "@dev"
     },
     "autoload": {
         "psr-4": {
