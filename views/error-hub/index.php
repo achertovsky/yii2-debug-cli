@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -10,11 +11,25 @@ use yii\grid\GridView;
 $this->title = 'Errors Hub';
 $this->params['breadcrumbs'][] = $this->title;
 achertovsky\debug\OverrideAsset::register($this);
+
 ?>
 <div class="error-hub-index">
     <div class="container main-container">
         <div class="row">
-            <h1><?= Html::encode($this->title) ?></h1>
+            <div class='col-md-12'>
+                <h1><?= Html::encode($this->title) ?></h1>
+            </div>
+            <div class='clearfix'></div>
+            <div class='col-md-4'>
+                Bulk delete options
+            </div>
+            <div class='col-md-4'>
+                <?=Html::button('Older than X days', ['id' => 'olderThanBth'])?>
+            </div>
+            <div class='col-md-4'>
+                <?=Html::button('Error text contains ...', ['id' => 'textContainsBth'])?>
+            </div>
+            <div class='clearfix'></div>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -50,3 +65,7 @@ achertovsky\debug\OverrideAsset::register($this);
         </div>
     </div>
 </div>
+<script>
+    var olderThanUrl = '<?=Url::toRoute('days')?>';
+    var textContainsUrl = '<?=Url::toRoute('text')?>';
+</script>

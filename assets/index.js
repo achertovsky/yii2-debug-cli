@@ -38,3 +38,25 @@ $('td .dropdown-list i').on('click', function(){
     $(this).parent().next().toggleClass('active');
     $(this).toggleClass('glyphicon-triangle-top');
 });
+
+$('#olderThanBth').on('click', function () {
+    var days = prompt("Older than how many days?", null);
+    $.ajax(
+        {
+            url: olderThanUrl+'?days='+days,
+            async: false
+        }
+    );
+    location.reload();
+});
+
+$('#textContainsBth').on('click', function () {
+    var text = prompt("What text should contain?", null);
+    $.ajax(
+        {
+            url: textContainsUrl+'?text='+text,
+            async: false
+        }
+    );
+    location.reload();
+});

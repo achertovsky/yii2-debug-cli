@@ -114,4 +114,36 @@ class ErrorHubController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    /**
+     * Remove depends on days
+     *
+     * @param integer $days
+     * @return void
+     */
+    public function actionDays($days)
+    {
+        ErrorHub::deleteAll(
+            [
+                'and',
+                ['<', 'created_at', time()-$days*24*3600]
+            ]
+        );
+    }
+
+    /**
+     * Remove depends on days
+     *
+     * @param integer $days
+     * @return void
+     */
+    public function actionText($text)
+    {
+        ErrorHub::deleteAll(
+            [
+                'and',
+                ['like', 'text', $text]
+            ]
+        );
+    }
 }
