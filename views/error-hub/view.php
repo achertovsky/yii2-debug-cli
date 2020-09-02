@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Json;
 use yii\widgets\DetailView;
 use achertovsky\formatter\i18n\Formatter;
 
