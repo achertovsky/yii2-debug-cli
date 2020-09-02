@@ -59,7 +59,7 @@ achertovsky\debug\OverrideAsset::register($this);
                             }
                         }
                     ],
-                    
+                    'trace',
                 ],
             ]); ?>
         </div>
