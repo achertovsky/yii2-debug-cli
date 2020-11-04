@@ -29,7 +29,7 @@ class m201104_120452_error_hub_index extends Migration
     public function safeUp()
     {
         try {
-            $this->createIndex('i_trace', '{{%error_hub}}', 'trace');
+            $this->createIndex('i_trace', '{{%error_hub}}', 'trace(255)');
         } catch (\Exception $ex) {
             echo "Index may already exist\n";
         }
