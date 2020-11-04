@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use achertovsky\formatter\i18n\Formatter;
 
 /* @var $this yii\web\View */
 /* @var $searchModel achertovsky\debug\models\ErrorHubSearch */
@@ -53,13 +54,30 @@ achertovsky\debug\OverrideAsset::register($this);
                                 if (is_string($result)) {
                                     return $result;
                                 }
-                                return $model->text;
+                                $formatter = new Formatter();
+                                return $formatter->asJson($result);
                             } catch (\Exception $ex) {
                                 return $model->text;
                             }
-                        }
+                        },
+                        'format' => 'raw'
                     ],
-                    
+                    [
+                        'attribute' => 'trace',
+                        'value' => function ($model) {
+                            try {
+                                $result = unserialize($model->trace);
+                                if (is_string($result)) {
+                                    return $result;
+                                }
+                                $formatter = new Formatter();
+                                return $formatter->asJson($result);
+                            } catch (\Exception $ex) {
+                                return $model->trace;
+                            }
+                        },
+                        'format' => 'raw'
+                    ],
                 ],
             ]); ?>
         </div>
