@@ -3,8 +3,11 @@
 namespace achertovsky\debug;
 
 use Yii;
-use yii\debug\Module as CoreModule;
+use yii\web\View;
+use yii\web\Response;
+use yii\base\Application;
 use yii\helpers\ArrayHelper;
+use yii\debug\Module as CoreModule;
 
 class Module extends CoreModule
 {
