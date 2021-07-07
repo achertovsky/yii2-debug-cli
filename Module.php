@@ -37,9 +37,39 @@ class Module extends CoreModule
     public function bootstrap($app)
     {
         $logTarget = new $this->logTarget($this);
-        parent::bootstrap($app);
         $this->logTarget = Yii::$app->getLog()->targets['debug'] = $logTarget;
         Yii::setAlias('@ach-debug', '@vendor/achertovsky/yii2-debug-cli');
+
+        /**
+         * Parent bootstrap copy-pasted to avoid adding urlmanager rules in CLI
+         */
+        /* @var $app \yii\base\Application */
+        $this->logTarget = $app->getLog()->targets['debug'] = new LogTarget($this);
+
+        // delay attaching event handler to the view component after it is fully configured
+        $app->on(Application::EVENT_BEFORE_REQUEST, function () use ($app) {
+            $app->getResponse()->on(Response::EVENT_AFTER_PREPARE, [$this, 'setDebugHeaders']);
+        });
+        $app->on(Application::EVENT_BEFORE_ACTION, function () use ($app) {
+            $app->getView()->on(View::EVENT_END_BODY, [$this, 'renderToolbar']);
+        });
+
+        if (php_sapi_name() != 'cli') {
+            $app->getUrlManager()->addRules([
+                [
+                    'class' => $this->urlRuleClass,
+                    'route' => $this->id,
+                    'pattern' => $this->id,
+                    'suffix' => false
+                ],
+                [
+                    'class' => $this->urlRuleClass,
+                    'route' => $this->id . '/<controller>/<action>',
+                    'pattern' => $this->id . '/<controller:[\w\-]+>/<action:[\w\-]+>',
+                    'suffix' => false
+                ]
+            ], false);
+        }
     }
     
     /**
